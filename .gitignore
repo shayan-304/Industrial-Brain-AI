@@ -1,0 +1,19 @@
+# Ignore dependency directories
+/frontend/node_modules/
+/frontend/dist/
+/backend/target/
+/backend/uploads/
+
+# Ignore environment variables and build files
+.env
+.env.local
+*.log
+*.zip
+
+# Ignore IDE settings
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

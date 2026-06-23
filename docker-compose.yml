@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=jdbc:h2:mem:industrialdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+      - DATABASE_USERNAME=sa
+      - DATABASE_PASSWORD=
+      - DATABASE_DRIVER=org.h2.Driver
+      - HIBERNATE_DIALECT=org.hibernate.dialect.H2Dialect
+      - JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970337336763979244226452948404D6351
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=password
+      - CLOUDINARY_CLOUD_NAME=demo
+      - CLOUDINARY_API_KEY=key
+      - CLOUDINARY_API_SECRET=secret
+      - GEMINI_API_KEY=your-api-key
+      - GEMINI_MODEL=gemini-1.5-flash
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always

@@ -1,0 +1,57 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: industrial-brain-ai
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:industrialdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: ${DATABASE_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+
+# Security JWT configuration
+app:
+  jwt:
+    secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970337336763979244226452948404D6351} # 512-bit fallback hex secret
+    expiration-ms: 86400000 # 24 hours
+
+# Integration Credentials
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME:demo}
+  api-key: ${CLOUDINARY_API_KEY:key}
+  api-secret: ${CLOUDINARY_API_SECRET:secret}
+
+neo4j:
+  uri: ${NEO4J_URI:bolt://localhost:7687}
+  username: ${NEO4J_USERNAME:neo4j}
+  password: ${NEO4J_PASSWORD:password}
+
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model-name: ${GEMINI_MODEL:gemini-1.5-flash}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
