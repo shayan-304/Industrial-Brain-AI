@@ -1,0 +1,62 @@
+services:
+  # 1. Spring Boot Backend Web Service (Docker)
+  - type: web
+    name: industrial-brain-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      # The database settings (Supabase Postgres)
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: DATABASE_DRIVER
+        value: org.postgresql.Driver
+      - key: HIBERNATE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+      # Auto-generated secure 512-bit JWT key
+      - key: JWT_SECRET
+        generateValue: true
+      # Neo4j Graph DB settings (Neo4j Aura)
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USERNAME
+        sync: false
+      - key: NEO4J_PASSWORD
+        sync: false
+      # Cloudinary Settings
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      # Gemini API Settings
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash
+
+  # 2. React Frontend Web Service (Static Site)
+  - type: web
+    name: industrial-brain-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm run build
+    publishPath: dist
+    plan: free
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://industrial-brain-backend.onrender.com
