@@ -110,9 +110,7 @@ function LandingPage({ user }: { user: User | null }) {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-warningYellow/10 rounded-full blur-[100px] -z-10" />
         <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-hazardOrange/5 rounded-full blur-[120px] -z-10" />
 
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-warningYellow mb-6 shadow-inner">
-          <Sparkles className="h-3.5 w-3.5" /> Hackathon Edition - 100% Free Tier Platform
-        </div>
+
         
         <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-8 max-w-4xl">
           Unified Asset & Operations <br />
@@ -185,7 +183,7 @@ function LandingPage({ user }: { user: User | null }) {
             <span className="font-bold text-slate-350">Industrial Brain AI</span>
           </div>
           <div>
-            &copy; 2026 Industrial Brain AI. Created for Global Hackathon. 100% Free Tier Stack.
+            &copy; 2026 Industrial Brain AI. Designed by <a href="https://www.linkedin.com/in/mafaaz-shayan" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-warningYellow transition-colors font-semibold">Mafaaz Shayan</a>
           </div>
         </div>
       </footer>
