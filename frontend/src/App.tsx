@@ -36,17 +36,6 @@ export default function App() {
     checkAuth();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-slate-950 text-slate-100">
-        <div className="flex flex-col items-center gap-4">
-          <Brain className="h-12 w-12 animate-pulse text-warningYellow" />
-          <p className="text-sm font-medium tracking-wide text-slate-400">Loading Industrial Intel...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <BrowserRouter>
       <Routes>
@@ -57,7 +46,20 @@ export default function App() {
         {/* Protected Dashboard Route */}
         <Route 
           path="/dashboard/*" 
-          element={user ? <DashboardLayout user={user} setUser={setUser} /> : <Navigate to="/login" replace />} 
+          element={
+            loading ? (
+              <div className="flex h-screen items-center justify-center bg-slate-950 text-slate-100">
+                <div className="flex flex-col items-center gap-4">
+                  <Brain className="h-12 w-12 animate-pulse text-warningYellow" />
+                  <p className="text-sm font-medium tracking-wide text-slate-400">Loading Industrial Intel...</p>
+                </div>
+              </div>
+            ) : user ? (
+              <DashboardLayout user={user} setUser={setUser} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } 
         />
       </Routes>
     </BrowserRouter>
